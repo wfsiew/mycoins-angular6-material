@@ -51,7 +51,7 @@ export class EditComponent implements OnInit {
     let fm = this.mform;
     let name = fm.value.name;
     let price = fm.value.price;
-    let id = this.coin._id;
+    let id = this.coin.id;
     this.service.updateCoin(name, price, id).subscribe(k => {
       this.sb.open('Coin updated successfully', '', {
         duration: 5000

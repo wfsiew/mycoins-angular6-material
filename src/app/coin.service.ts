@@ -7,10 +7,12 @@ import { map } from 'rxjs/operators';
 })
 export class CoinService {
 
+  baseuri = 'http://localhost:9000/app';
+
   constructor(private http: HttpClient) { }
 
   addCoin(name, price) {
-    const uri = 'http://localhost:9000/coins/add';
+    const uri = `${this.baseuri}/coins/`;
     const o = {
       name: name,
       price: price
@@ -19,26 +21,26 @@ export class CoinService {
   }
 
   getCoins() {
-    const uri = 'http://localhost:9000/coins';
+    const uri = `${this.baseuri}/coins/`;
     return this.http.get(uri).pipe(map(k => k));
   }
 
   editCoin(id) {
-    const uri = `http://localhost:9000/coins/edit/${id}`;
+    const uri = `${this.baseuri}/coin/${id}/`;
     return this.http.get(uri).pipe(map(k => k));
   }
 
   updateCoin(name, price, id) {
-    const uri = `http://localhost:9000/coins/update/${id}`;
+    const uri = `${this.baseuri}/coin/${id}/`;
     const o = {
       name: name,
       price: price
     };
-    return this.http.post(uri, o);
+    return this.http.put(uri, o);
   }
 
   deleteCoin(id) {
-    const uri = `http://localhost:9000/coins/delete/${id}`;
-    return this.http.get(uri);
+    const uri = `${this.baseuri}/coin/${id}/`;
+    return this.http.delete(uri);
   }
 }
